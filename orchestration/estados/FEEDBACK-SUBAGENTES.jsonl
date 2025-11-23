@@ -1,0 +1,23 @@
+# FEEDBACK DE SUBAGENTES
+# Formato: JSONL (JSON Lines) - una línea JSON por error detectado
+#
+# Campos obligatorios:
+# - timestamp: ISO 8601 timestamp del error
+# - subagent: ID o tipo del subagente
+# - task_id: ID de la tarea (ej: DB-042-SUB-001)
+# - agent_principal: Agente que validó
+# - error_category: Categoría del error (ver SISTEMA-RETROALIMENTACION-MEJORA-CONTINUA.md)
+# - error_detail: Descripción específica
+# - phase: Fase donde se detectó
+# - archivo_afectado: Archivo con error (si aplica)
+# - corrected: true/false
+# - iterations: Número de intentos
+# - time_to_fix_minutes: Tiempo para corregir
+# - context_provided: ¿Se dio contexto completo?
+# - reference_consulted: ¿Consultó referencias?
+# - inventory_checked: ¿Verificó inventarios?
+#
+# Ejemplo de línea:
+# {"timestamp":"2025-11-17T14:30:00Z","subagent":"general-purpose-001","task_id":"DB-042-SUB-001","agent_principal":"Database-Agent","error_category":"missing_specification","error_detail":"Faltó implementar índice idx_projects_code","phase":"validation_technical","archivo_afectado":"apps/database/ddl/schemas/project_management/tables/01-projects.sql","corrected":true,"iterations":2,"time_to_fix_minutes":15,"context_provided":true,"reference_consulted":false,"inventory_checked":true}
+#
+# NO EDITAR MANUALMENTE - Usar scripts de registro

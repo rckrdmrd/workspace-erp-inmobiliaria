@@ -1,0 +1,144 @@
+{
+  "proyecto": "MVP Sistema Administración de Obra e INFONAVIT",
+  "version": "0.1.0",
+  "fecha_actualizacion": "2025-11-17T12:00:00Z",
+  "estado_general": "INICIAL",
+
+  "resumen": {
+    "completitud_general": 0,
+    "modulos_total": 8,
+    "modulos_completados": 0,
+    "modulos_en_progreso": 0,
+    "modulos_pendientes": 8,
+    "tareas_completadas": 0,
+    "tareas_pendientes": 0
+  },
+
+  "stacks": {
+    "database": {
+      "estado": "INICIAL",
+      "schemas_total": 9,
+      "schemas_completados": 0,
+      "tablas_total": 65,
+      "tablas_completadas": 0,
+      "completitud": 0
+    },
+    "backend": {
+      "estado": "INICIAL",
+      "modulos_total": 8,
+      "modulos_completados": 0,
+      "entities_total": 65,
+      "entities_completadas": 0,
+      "completitud": 0
+    },
+    "frontend_web": {
+      "estado": "INICIAL",
+      "paginas_total": 45,
+      "paginas_completadas": 0,
+      "componentes_total": 120,
+      "componentes_completados": 0,
+      "completitud": 0
+    },
+    "frontend_mobile": {
+      "estado": "INICIAL",
+      "pantallas_total": 30,
+      "pantallas_completadas": 0,
+      "completitud": 0
+    }
+  },
+
+  "modulos_mvp": [
+    {
+      "nombre": "preconstruction",
+      "descripcion": "Preconstrucción y licitaciones",
+      "prioridad": "P0",
+      "estado": "PENDIENTE",
+      "completitud": 0,
+      "bloqueadores": []
+    },
+    {
+      "nombre": "projects",
+      "descripcion": "Proyectos, obras y estructura de fraccionamientos",
+      "prioridad": "P0",
+      "estado": "PENDIENTE",
+      "completitud": 0,
+      "bloqueadores": []
+    },
+    {
+      "nombre": "budgets",
+      "descripcion": "Presupuestos, costos y control de desviaciones",
+      "prioridad": "P0",
+      "estado": "PENDIENTE",
+      "completitud": 0,
+      "bloqueadores": []
+    },
+    {
+      "nombre": "procurement",
+      "descripcion": "Compras, inventarios y almacenes",
+      "prioridad": "P0",
+      "estado": "PENDIENTE",
+      "completitud": 0,
+      "bloqueadores": []
+    },
+    {
+      "nombre": "contracts",
+      "descripcion": "Contratos, subcontratos y estimaciones",
+      "prioridad": "P0",
+      "estado": "PENDIENTE",
+      "completitud": 0,
+      "bloqueadores": []
+    },
+    {
+      "nombre": "progress",
+      "descripcion": "Control de avances con evidencia fotográfica y curva S",
+      "prioridad": "P0",
+      "estado": "PENDIENTE",
+      "completitud": 0,
+      "bloqueadores": []
+    },
+    {
+      "nombre": "crm",
+      "descripcion": "CRM derechohabientes e INFONAVIT básico",
+      "prioridad": "P0",
+      "estado": "PENDIENTE",
+      "completitud": 0,
+      "bloqueadores": []
+    },
+    {
+      "nombre": "reports",
+      "descripcion": "Reportes ejecutivos y BI",
+      "prioridad": "P1",
+      "estado": "PENDIENTE",
+      "completitud": 0,
+      "bloqueadores": []
+    }
+  ],
+
+  "calidad": {
+    "cobertura_tests": 0,
+    "documentacion": 100,
+    "estandares_cumplimiento": 100,
+    "deuda_tecnica": "NINGUNA",
+    "vulnerabilidades": 0
+  },
+
+  "desarrollo": {
+    "tareas_completadas_hoy": 0,
+    "tareas_completadas_semana": 0,
+    "tareas_pendientes": 0,
+    "velocity": 0,
+    "estimado_completar_mvp": "6 semanas"
+  },
+
+  "alertas": {
+    "criticas": 0,
+    "altas": 0,
+    "medias": 0,
+    "bajas": 0,
+    "lista_criticas": [],
+    "lista_altas": []
+  },
+
+  "ultima_validacion": "2025-11-17T12:00:00Z",
+  "proxima_validacion": "2025-11-18T12:00:00Z"
+}

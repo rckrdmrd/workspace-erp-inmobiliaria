@@ -1,0 +1,525 @@
+# TRACEABILITY.yml - MAI-001: Fundamentos
+# Matriz completa de trazabilidad: Requerimientos → Especificaciones → Historias → Implementación
+
+epic_code: MAI-001
+epic_name: Fundamentos
+phase: 1
+phase_name: Alcance Inicial
+budget_mxn: 25000
+story_points: 50
+status: planned
+sprint: 0-2
+period: "Semanas 1-2"
+reused_from_gamilit: 90%
+
+# ============================================================================
+# DOCUMENTACIÓN
+# ============================================================================
+
+documentation:
+  requirements:
+    - id: RF-AUTH-001
+      file: requerimientos/RF-AUTH-001-roles-construccion.md
+      title: Sistema de Roles de Construcción
+      status: planned
+      reused_from: EAI-001/RF-AUTH-001
+      adaptations:
+        - "3 roles → 7 roles específicos de construcción"
+        - "Permisos ajustados por módulo de obra"
+
+    - id: RF-AUTH-002
+      file: requerimientos/RF-AUTH-002-estados-cuenta.md
+      title: Estados de Cuenta de Usuario
+      status: planned
+      reused_from: EAI-001/RF-AUTH-002
+      adaptations:
+        - "Estados específicos para usuarios de obra"
+
+    - id: RF-AUTH-003
+      file: requerimientos/RF-AUTH-003-multi-tenancy.md
+      title: Multi-tenancy por Constructora
+      status: planned
+      reused_from: EAI-001/RF-AUTH-003 (concepto)
+      adaptations:
+        - "Soporte de múltiples constructoras (tenants)"
+        - "RLS por constructora + proyecto"
+
+  specifications:
+    - id: ET-AUTH-001
+      file: especificaciones/ET-AUTH-001-rbac.md
+      rf: RF-AUTH-001
+      title: RBAC Implementation para Construcción
+      status: planned
+      reused_from: EAI-001/ET-AUTH-001
+      adaptations:
+        - "Implementación de 7 roles vs 3 de GAMILIT"
+        - "Matriz de permisos por módulo de obra"
+
+    - id: ET-AUTH-002
+      file: especificaciones/ET-AUTH-002-estados-cuenta.md
+      rf: RF-AUTH-002
+      title: Estados de Cuenta de Usuario
+      status: planned
+      reused_from: EAI-001/ET-AUTH-002
+      adaptations: ["Mínimas - Concepto igual"]
+
+    - id: ET-AUTH-003
+      file: especificaciones/ET-AUTH-003-multi-tenancy.md
+      rf: RF-AUTH-003
+      title: Multi-tenancy Implementation
+      status: planned
+      reused_from: EAI-001 (concepto de multi-tenancy)
+      adaptations:
+        - "Aislamiento de datos por constructora"
+        - "RLS policies por tenant"
+
+  user_stories:
+    - id: US-FUND-001
+      file: historias-usuario/US-FUND-001-autenticacion-basica-jwt.md
+      title: Autenticación Básica JWT
+      rf: [RF-AUTH-001, RF-AUTH-002]
+      story_points: 8
+      status: planned
+      reused_from: EAI-001/US-FUND-001
+      adaptations: ["Mínimas - 90% reutilizable"]
+
+    - id: US-FUND-002
+      file: historias-usuario/US-FUND-002-perfiles-usuario-construccion.md
+      title: Perfiles de Usuario de Construcción
+      rf: RF-AUTH-001
+      story_points: 5
+      status: planned
+      reused_from: EAI-001/US-FUND-002
+      adaptations: ["Perfiles específicos de construcción"]
+
+    - id: US-FUND-003
+      file: historias-usuario/US-FUND-003-dashboard-por-rol.md
+      title: Dashboard Principal por Rol
+      rf: RF-AUTH-001
+      story_points: 8
+      status: planned
+      reused_from: EAI-001/US-FUND-003
+      adaptations: ["7 variantes de dashboard por rol"]
+
+    - id: US-FUND-004
+      file: historias-usuario/US-FUND-004-infraestructura-base.md
+      title: Infraestructura Técnica Base
+      rf: [RF-AUTH-001, RF-AUTH-003]
+      story_points: 12
+      status: planned
+      reused_from: EAI-001/US-FUND-004
+      adaptations: ["Setup de DB, API, Frontend desde GAMILIT"]
+
+    - id: US-FUND-005
+      file: historias-usuario/US-FUND-005-sistema-sesiones.md
+      title: Sistema de Sesiones y Estado
+      rf: RF-AUTH-002
+      story_points: 6
+      status: planned
+      reused_from: EAI-001/US-FUND-005
+      adaptations: ["Ninguna - Reutilización directa"]
+
+    - id: US-FUND-006
+      file: historias-usuario/US-FUND-006-api-restful-base.md
+      title: API RESTful Básica
+      rf: [RF-AUTH-001, RF-AUTH-003]
+      story_points: 8
+      status: planned
+      reused_from: EAI-001/US-FUND-006
+      adaptations: ["Endpoints específicos de construcción"]
+
+    - id: US-FUND-007
+      file: historias-usuario/US-FUND-007-navegacion-routing.md
+      title: Navegación y Routing
+      rf: RF-AUTH-001
+      story_points: 5
+      status: planned
+      reused_from: EAI-001/US-FUND-007
+      adaptations: ["Rutas específicas de obra/proyecto"]
+
+    - id: US-FUND-008
+      file: historias-usuario/US-FUND-008-ui-ux-base.md
+      title: UI/UX Base
+      rf: RF-AUTH-001
+      story_points: 3
+      status: planned
+      reused_from: EAI-001/US-FUND-008
+      adaptations: ["Branding de constructora, tema personalizado"]
+
+# ============================================================================
+# IMPLEMENTACIÓN - BASE DE DATOS
+# ============================================================================
+
+implementation:
+  database:
+    schemas:
+      - name: auth
+        path: apps/database/ddl/schemas/auth/
+        description: Schema de autenticación (usuarios, sesiones)
+        reused_from_gamilit: true
+
+      - name: auth_management
+        path: apps/database/ddl/schemas/auth_management/
+        description: Schema de gestión de autenticación (perfiles, roles)
+        reused_from_gamilit: true
+
+      - name: audit_logging
+        path: apps/database/ddl/schemas/audit_logging/
+        description: Schema de auditoría
+        reused_from_gamilit: true
+
+      - name: constructoras
+        path: apps/database/ddl/schemas/constructoras/
+        description: Schema de multi-tenancy (constructoras)
+        reused_from_gamilit: false
+        note: "Nuevo schema para multi-tenancy"
+
+    enums:
+      - name: construction_role
+        schema: auth_management
+        file: apps/database/ddl/00-prerequisites.sql
+        lines: "30-39"
+        values: [director, engineer, resident, purchases, finance, hr, post_sales]
+        rf: RF-AUTH-001
+        reused_from: gamilit_role (adaptado)
+        note: "7 roles específicos de construcción vs 3 de GAMILIT"
+
+      - name: account_status
+        schema: auth_management
+        file: apps/database/ddl/00-prerequisites.sql
+        lines: "40-44"
+        values: [active, suspended, banned, pending_verification, inactive]
+        rf: RF-AUTH-002
+        reused_from: account_status (igual)
+
+    tables:
+      - name: constructoras
+        schema: constructoras
+        file: apps/database/ddl/schemas/constructoras/tables/01-constructoras.sql
+        lines: 80
+        description: Catálogo de constructoras (tenants)
+        rf: RF-AUTH-003
+        reused_from_gamilit: false
+        note: "Nueva tabla para multi-tenancy"
+        columns:
+          - id (UUID, PK)
+          - nombre (TEXT)
+          - razon_social (TEXT)
+          - rfc (TEXT UNIQUE)
+          - logo_url (TEXT)
+          - active (BOOLEAN)
+          - settings (JSONB)
+          - created_at (TIMESTAMPTZ)
+          - updated_at (TIMESTAMPTZ)
+
+      - name: profiles
+        schema: auth_management
+        file: apps/database/ddl/schemas/auth_management/tables/03-profiles.sql
+        lines: 125
+        description: Perfiles de usuario con rol de construcción
+        rf: RF-AUTH-001
+        reused_from_gamilit: true
+        adaptations:
+          - "Agregar constructora_id FK"
+          - "Cambiar role a construction_role ENUM"
+        columns_using_enums:
+          - column: role
+            enum: construction_role
+          - column: account_status
+            enum: account_status
+
+      - name: user_constructoras
+        schema: auth_management
+        file: apps/database/ddl/schemas/auth_management/tables/04-user_constructoras.sql
+        lines: 70
+        description: Relación usuario-constructora (un usuario puede estar en múltiples constructoras)
+        rf: RF-AUTH-003
+        reused_from_gamilit: false
+        note: "Nueva tabla para multi-tenancy"
+        columns:
+          - id (UUID, PK)
+          - user_id (UUID, FK)
+          - constructora_id (UUID, FK)
+          - role_in_constructora (construction_role)
+          - is_primary (BOOLEAN)
+          - active (BOOLEAN)
+          - created_at (TIMESTAMPTZ)
+
+      - name: audit_logs
+        schema: audit_logging
+        file: apps/database/ddl/schemas/audit_logging/tables/01-audit_logs.sql
+        lines: 95
+        description: Logs de auditoría de acciones críticas
+        rf: RF-AUTH-002
+        reused_from_gamilit: true
+        adaptations: ["Agregar constructora_id para filtrado"]
+
+    functions:
+      - name: get_current_user_id
+        schema: public
+        file: apps/database/ddl/schemas/public/functions/get_current_user_id.sql
+        lines: "10-15"
+        description: Obtiene el user_id del usuario en contexto
+        rf: RF-AUTH-001
+        reused_from_gamilit: true
+        adaptations: []
+
+      - name: get_current_user_role
+        schema: public
+        file: apps/database/ddl/schemas/public/functions/get_current_user_role.sql
+        lines: "10-20"
+        description: Obtiene el rol del usuario en contexto
+        rf: RF-AUTH-001
+        reused_from_gamilit: true
+        adaptations: ["Retornar construction_role en lugar de gamilit_role"]
+
+      - name: get_current_constructora_id
+        schema: public
+        file: apps/database/ddl/schemas/public/functions/get_current_constructora_id.sql
+        lines: "10-20"
+        description: Obtiene la constructora activa del usuario
+        rf: RF-AUTH-003
+        reused_from_gamilit: false
+        note: "Nueva función para multi-tenancy"
+
+      - name: user_has_access_to_constructora
+        schema: public
+        file: apps/database/ddl/schemas/public/functions/user_has_access_to_constructora.sql
+        lines: "10-25"
+        description: Verifica si usuario tiene acceso a una constructora
+        rf: RF-AUTH-003
+        reused_from_gamilit: false
+        note: "Nueva función para multi-tenancy"
+
+    rls_policies:
+      - table: constructoras.constructoras
+        policy: constructoras_select_own
+        description: Usuarios solo ven constructoras a las que pertenecen
+        rf: RF-AUTH-003
+        reused_from_gamilit: false
+        sql: |
+          CREATE POLICY "constructoras_select_own" ON constructoras.constructoras
+              FOR SELECT
+              TO authenticated
+              USING (
+                  id IN (
+                      SELECT constructora_id
+                      FROM auth_management.user_constructoras
+                      WHERE user_id = get_current_user_id()
+                      AND active = true
+                  )
+              );
+
+      - table: auth_management.profiles
+        policy: profiles_select_all
+        description: Todos pueden ver perfiles básicos dentro de su constructora
+        rf: RF-AUTH-001
+        reused_from_gamilit: true
+        adaptations: ["Filtrar por constructora"]
+
+# ============================================================================
+# IMPLEMENTACIÓN - BACKEND
+# ============================================================================
+
+  backend:
+    modules:
+      - name: auth
+        path: apps/backend/src/modules/auth/
+        description: Módulo de autenticación y autorización
+        rf: [RF-AUTH-001, RF-AUTH-002, RF-AUTH-003]
+        reused_from_gamilit: true
+        adaptations:
+          - "Lógica de multi-tenancy"
+          - "7 roles en lugar de 3"
+
+    services:
+      - name: AuthService
+        path: apps/backend/src/modules/auth/auth.service.ts
+        description: Lógica de autenticación (login, register, JWT)
+        rf: [RF-AUTH-001, RF-AUTH-002]
+        reused_from_gamilit: true
+        adaptations: ["Validar constructora al login"]
+
+      - name: ConstructoraService
+        path: apps/backend/src/modules/auth/constructora.service.ts
+        description: Lógica de gestión de constructoras
+        rf: RF-AUTH-003
+        reused_from_gamilit: false
+        note: "Nuevo servicio para multi-tenancy"
+
+    guards:
+      - name: RolesGuard
+        path: apps/backend/src/shared/guards/roles.guard.ts
+        description: Guard para validar roles de usuario
+        rf: RF-AUTH-001
+        reused_from_gamilit: true
+        adaptations: ["Soportar 7 roles de construcción"]
+
+      - name: ConstructoraGuard
+        path: apps/backend/src/shared/guards/constructora.guard.ts
+        description: Guard para validar acceso a recursos por constructora
+        rf: RF-AUTH-003
+        reused_from_gamilit: false
+        note: "Nuevo guard para multi-tenancy"
+
+    enums:
+      - name: ConstructionRole
+        path: apps/backend/src/shared/enums/construction-role.enum.ts
+        description: Enum TypeScript de roles de construcción
+        rf: RF-AUTH-001
+        reused_from: GamilitRole (adaptado)
+        values:
+          - DIRECTOR = 'director'
+          - ENGINEER = 'engineer'
+          - RESIDENT = 'resident'
+          - PURCHASES = 'purchases'
+          - FINANCE = 'finance'
+          - HR = 'hr'
+          - POST_SALES = 'post_sales'
+
+# ============================================================================
+# IMPLEMENTACIÓN - FRONTEND
+# ============================================================================
+
+  frontend:
+    features:
+      - name: auth
+        path: apps/frontend/src/features/auth/
+        description: Feature de autenticación (login, register, perfil)
+        rf: [RF-AUTH-001, RF-AUTH-002]
+        reused_from_gamilit: true
+        adaptations: ["Selector de constructora al login"]
+
+    components:
+      - name: LoginForm
+        path: apps/frontend/src/features/auth/components/LoginForm.tsx
+        description: Formulario de login con selector de constructora
+        rf: RF-AUTH-001
+        reused_from_gamilit: true
+        adaptations: ["Agregar dropdown de constructora"]
+
+      - name: ConstructoraSelector
+        path: apps/frontend/src/features/auth/components/ConstructoraSelector.tsx
+        description: Selector de constructora activa
+        rf: RF-AUTH-003
+        reused_from_gamilit: false
+        note: "Nuevo componente para multi-tenancy"
+
+      - name: RoleBasedDashboard
+        path: apps/frontend/src/features/dashboard/components/RoleBasedDashboard.tsx
+        description: Dashboard principal con 7 variantes por rol
+        rf: RF-AUTH-001
+        reused_from_gamilit: true
+        adaptations: ["7 variantes en lugar de 3"]
+
+    stores:
+      - name: authStore
+        path: apps/frontend/src/stores/authStore.ts
+        description: Store de autenticación y usuario
+        rf: [RF-AUTH-001, RF-AUTH-002]
+        reused_from_gamilit: true
+        adaptations: ["Agregar constructora activa"]
+
+      - name: constructoraStore
+        path: apps/frontend/src/stores/constructoraStore.ts
+        description: Store de constructora activa
+        rf: RF-AUTH-003
+        reused_from_gamilit: false
+        note: "Nuevo store para multi-tenancy"
+
+# ============================================================================
+# TESTING
+# ============================================================================
+
+  testing:
+    unit_tests:
+      - module: AuthService
+        file: apps/backend/src/modules/auth/auth.service.spec.ts
+        coverage_target: 85%
+        reused_from_gamilit: true
+
+      - module: RolesGuard
+        file: apps/backend/src/shared/guards/roles.guard.spec.ts
+        coverage_target: 90%
+        reused_from_gamilit: true
+
+      - module: ConstructoraGuard
+        file: apps/backend/src/shared/guards/constructora.guard.spec.ts
+        coverage_target: 90%
+        reused_from_gamilit: false
+
+    e2e_tests:
+      - name: Auth E2E
+        file: apps/backend/test/auth/auth.e2e-spec.ts
+        scenarios:
+          - Login con credenciales válidas
+          - Login con constructora inválida
+          - Acceso a recurso sin permisos
+          - Cambio de constructora activa
+        reused_from_gamilit: true
+
+    integration_tests:
+      - name: Multi-tenancy Integration
+        file: apps/backend/test/integration/multi-tenancy.spec.ts
+        scenarios:
+          - Aislamiento de datos entre constructoras
+          - RLS policies funcionan correctamente
+        reused_from_gamilit: false
+
+# ============================================================================
+# MÉTRICAS
+# ============================================================================
+
+metrics:
+  story_points:
+    planned: 50
+    completed: 0
+    variance: 0%
+
+  budget:
+    planned: 25000
+    actual: 0
+    variance: 0%
+
+  reuse_from_gamilit:
+    infrastructure: 90%
+    database: 75%
+    backend: 85%
+    frontend: 85%
+    overall: 84%
+
+  time_saved_weeks: 2.5
+
+# ============================================================================
+# ROADMAP
+# ============================================================================
+
+roadmap:
+  sprint_0:
+    week: 1
+    goal: "Migración de componentes GAMILIT"
+    tasks:
+      - Migrar sistema de autenticación JWT
+      - Migrar guards y middleware
+      - Migrar componentes UI base
+      - Setup de base de datos con schemas
+
+  sprint_1:
+    week: 2
+    goal: "Implementación de MAI-001"
+    tasks:
+      - Implementar 7 roles de construcción
+      - Implementar multi-tenancy
+      - Crear dashboards por rol
+      - Tests E2E de autenticación
+
+# ============================================================================
+# NOTAS
+# ============================================================================
+
+notes:
+  - "Reutilización masiva de GAMILIT (90%) reduce tiempo significativamente"
+  - "Multi-tenancy es adición crítica vs GAMILIT"
+  - "7 roles requieren matriz de permisos detallada por módulo"
+  - "Tests de GAMILIT sirven como base, adaptarlos"
+  - "Documentar todas las adaptaciones para mantenibilidad"

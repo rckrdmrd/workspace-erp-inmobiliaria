@@ -1,0 +1,258 @@
+# MASTER INVENTORY - MVP Sistema Administración de Obra
+
+metadata:
+  version: "1.0.0"
+  generated_date: "2025-11-17"
+  last_updated: "2025-11-17"
+  total_modules: 0
+  total_objects: 0
+  coverage:
+    database: 0%
+    backend: 0%
+    frontend: 0%
+    tests: 0%
+
+# ============================================================================
+# MÓDULOS DEL SISTEMA
+# ============================================================================
+
+# Ejemplo de estructura (comentado):
+# modules:
+#   projects:  # Nombre del módulo
+#     status: ✅ Completo | 🔄 En Progreso | ⏳ Pendiente | ❌ Bloqueado
+#     priority: P0 | P1 | P2 | P3
+#     phase: MVP | Enterprise
+#     completitud: 0%
+#
+#     # DATABASE
+#     database:
+#       schema: project_management
+#       tables:
+#         - name: projects
+#           file: apps/database/ddl/schemas/project_management/tables/01-projects.sql
+#           columns: 15
+#           indexes: 4
+#           triggers: 1
+#           rls_policies: 3
+#           related_backend_entity: Project
+#           related_frontend_pages: [ProjectsPage, ProjectDetailPage]
+#           status: ✅ Completo
+#
+#       functions:
+#         - name: calculate_project_progress
+#           file: apps/database/ddl/schemas/project_management/functions/01-calculate_project_progress.sql
+#           returns: numeric
+#           used_by: [Backend ProjectService]
+#
+#     # BACKEND
+#     backend:
+#       module_path: apps/backend/src/modules/projects
+#       entities:
+#         - name: Project
+#           file: entities/project.entity.ts
+#           table: project_management.projects
+#           relations: [developments, budgets, contracts]
+#           used_in_controllers: [ProjectController]
+#           used_in_services: [ProjectService, BudgetService]
+#           dto_count: 4
+#           status: ✅ Completo
+#
+#       services:
+#         - name: ProjectService
+#           file: services/project.service.ts
+#           entities: [Project, Development]
+#           dependencies: [DevelopmentService]
+#           endpoints: 8
+#           complexity: Media
+#
+#       controllers:
+#         - name: ProjectController
+#           file: controllers/project.controller.ts
+#           routes: [/api/projects, /api/projects/:id]
+#           methods: [GET, POST, PUT, PATCH, DELETE]
+#           swagger: ✅ Completo
+#           used_by_frontend: ✅ Sí
+#
+#     # FRONTEND
+#     frontend:
+#       pages:
+#         - name: ProjectsPage
+#           file: apps/frontend/src/apps/admin/pages/ProjectsPage.tsx
+#           routes: [/admin/projects]
+#           components_used: [ProjectCard, ProjectList, ProjectFilters]
+#           stores_used: [projectStore]
+#           api_endpoints: [GET /api/projects, POST /api/projects]
+#           status: ✅ Completo
+#
+#       components:
+#         - name: ProjectCard
+#           file: apps/frontend/src/shared/components/ProjectCard.tsx
+#           used_in_pages: [ProjectsPage, DashboardPage]
+#           dependencies: [Card, Badge, Button]
+#           complexity: Baja
+#
+#       stores:
+#         - name: projectStore
+#           file: apps/frontend/src/stores/projectStore.ts
+#           state: [projects, selectedProject, loading, error]
+#           actions: [fetchProjects, createProject, updateProject, deleteProject]
+#           used_in_pages: [ProjectsPage, ProjectDetailPage]
+#
+#     # TESTS
+#     tests:
+#       coverage: 85%
+#       unit_tests: 12
+#       integration_tests: 5
+#       e2e_tests: 3
+#       files:
+#         - apps/backend/src/modules/projects/__tests__/project.service.spec.ts
+#         - apps/frontend/src/apps/admin/pages/__tests__/ProjectsPage.test.tsx
+#
+#     # DOCUMENTATION
+#     documentation:
+#       readme: ✅ apps/backend/src/modules/projects/README.md
+#       adr: ✅ docs/adr/ADR-003-estructura-proyectos.md
+#       api_docs: ✅ Swagger completo
+#       inline_comments: ✅ JSDoc/TSDoc
+#
+#     # METRICS
+#     metrics:
+#       complexity: Baja | Media | Alta
+#       maintainability_index: 85
+#       technical_debt: Bajo | Medio | Alto
+#       security_score: 95
+
+# ============================================================================
+# RELACIONES ENTRE MÓDULOS
+# ============================================================================
+
+# relationships:
+#   projects:
+#     depends_on: []  # Módulo base, sin dependencias
+#     depended_by: [budgets, contracts, purchases, estimates]
+#
+#   budgets:
+#     depends_on: [projects]
+#     depended_by: [estimates]
+
+# ============================================================================
+# ESTADÍSTICAS GLOBALES
+# ============================================================================
+
+statistics:
+  database:
+    schemas: 0
+    tables: 0
+    functions: 0
+    triggers: 0
+    views: 0
+    indexes: 0
+
+  backend:
+    modules: 0
+    entities: 0
+    services: 0
+    controllers: 0
+    dtos: 0
+
+  frontend:
+    pages: 0
+    components: 0
+    stores: 0
+
+  tests:
+    total: 0
+    unit: 0
+    integration: 0
+    e2e: 0
+    coverage: 0%
+
+# ============================================================================
+# SISTEMA DE ORCHESTRATION - DOCUMENTACIÓN
+# ============================================================================
+
+orchestration_system:
+  version: "1.1.0"
+  last_updated: "2025-11-20"
+  status: "✅ Completo"
+
+  directivas:
+    - name: DIRECTIVA-CONTROL-VERSIONES
+      file: orchestration/directivas/DIRECTIVA-CONTROL-VERSIONES.md
+      description: "Estrategia de commits, branching y control de versiones"
+      version: "1.0.0"
+      mandatory: true
+
+    - name: DIRECTIVA-CALIDAD-CODIGO
+      file: orchestration/directivas/DIRECTIVA-CALIDAD-CODIGO.md
+      description: "Principios SOLID, patrones de diseño y clean code"
+      version: "1.0.0"
+      mandatory: true
+
+    - name: DIRECTIVA-DISENO-BASE-DATOS
+      file: orchestration/directivas/DIRECTIVA-DISENO-BASE-DATOS.md
+      description: "Normalización, indexación y diseño de DB"
+      version: "1.0.0"
+      mandatory: true
+
+    - name: PROTOCOLO-ESCALAMIENTO-PO
+      file: orchestration/directivas/PROTOCOLO-ESCALAMIENTO-PO.md
+      description: "Protocolo para consultas al Product Owner"
+      version: "1.0.0"
+      mandatory: true
+
+    - name: DIRECTIVA-DOCUMENTACION-OBLIGATORIA
+      file: orchestration/directivas/DIRECTIVA-DOCUMENTACION-OBLIGATORIA.md
+      description: "Políticas de documentación obligatoria"
+      version: "1.0.0"
+      mandatory: true
+
+    - name: DIRECTIVA-VALIDACION-SUBAGENTES
+      file: orchestration/directivas/DIRECTIVA-VALIDACION-SUBAGENTES.md
+      description: "Proceso de validación de trabajo de subagentes"
+      version: "1.0.0"
+      mandatory: true
+
+    - name: ESTANDARES-NOMENCLATURA
+      file: orchestration/directivas/ESTANDARES-NOMENCLATURA.md
+      description: "Estándares de nomenclatura por capa"
+      version: "1.1.0"
+      mandatory: true
+
+    - name: GUIA-NOMENCLATURA-COMPLETA
+      file: orchestration/directivas/GUIA-NOMENCLATURA-COMPLETA.md
+      description: "Guía completa de nomenclatura (archivos, variables, carpetas)"
+      version: "1.0.0"
+      mandatory: true
+
+    - name: POLITICAS-USO-AGENTES
+      file: orchestration/directivas/POLITICAS-USO-AGENTES.md
+      description: "Políticas de uso de agentes y subagentes"
+      version: "1.0.0"
+      mandatory: true
+
+  prompts:
+    - name: PROMPT-AGENTES-PRINCIPALES
+      file: orchestration/prompts/PROMPT-AGENTES-PRINCIPALES.md
+      description: "Prompt maestro para Database-Agent, Backend-Agent, Frontend-Agent"
+      version: "1.1.0"
+      updated: "2025-11-20"
+      changes: "Agregada excepción /tmp para archivos temporales"
+
+    - name: PROMPT-SUBAGENTES
+      file: orchestration/prompts/PROMPT-SUBAGENTES.md
+      description: "Prompt para todos los subagentes"
+      version: "1.0.0"
+
+  templates:
+    - TEMPLATE-PLAN.md
+    - TEMPLATE-CONTEXTO-SUBAGENTE.md
+    - TEMPLATE-ANALISIS.md
+    - TEMPLATE-VALIDACION.md
+
+  coverage:
+    directivas: "✅ 100%"
+    prompts: "✅ 100%"
+    templates: "✅ 100%"
+    inventarios: "✅ Estructurados"
+    trazas: "✅ Configuradas"
