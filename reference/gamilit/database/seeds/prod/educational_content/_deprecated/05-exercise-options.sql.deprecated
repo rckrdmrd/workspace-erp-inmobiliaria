@@ -1,0 +1,129 @@
+-- =====================================================
+-- Seed: educational_content.exercise_options (PROD)
+-- Description: Opciones para ejercicios de opción múltiple
+-- Environment: PRODUCTION
+-- Dependencies: educational_content.exercises
+-- Order: 05
+-- Created: 2025-11-11
+-- Version: 1.0
+-- =====================================================
+--
+-- OPCIONES: 4 por cada ejercicio multiple_choice
+-- TOTAL: ~100 opciones (25 ejercicios × 4 opciones)
+-- =====================================================
+
+SET search_path TO educational_content, public;
+
+-- =====================================================
+-- INSERT: Exercise Options
+-- =====================================================
+
+DO $$
+DECLARE
+    exercise_rec RECORD;
+    option_texts TEXT[];
+    i INTEGER;
+    options_count INTEGER := 0;
+BEGIN
+    -- Definir opciones genéricas por nivel de dificultad
+    FOR exercise_rec IN
+        SELECT id, title, difficulty_level
+        FROM educational_content.exercises
+        WHERE mechanic_type = 'multiple_choice'
+        ORDER BY id
+    LOOP
+        -- Generar opciones según dificultad
+        option_texts := CASE exercise_rec.difficulty_level
+            WHEN 'beginner' THEN ARRAY[
+                'Respuesta correcta: comprende el significado literal del texto',
+                'Distractor 1: interpretación parcial incorrecta',
+                'Distractor 2: confunde detalles secundarios',
+                'Distractor 3: asociación incorrecta de conceptos'
+            ]
+            WHEN 'intermediate' THEN ARRAY[
+                'Respuesta correcta: infiere información implícita del texto',
+                'Distractor 1: conclusión superficial sin análisis',
+                'Distractor 2: generalización incorrecta',
+                'Distractor 3: relaciona conceptos sin fundamento'
+            ]
+            ELSE ARRAY[
+                'Respuesta correcta: analiza críticamente el contenido',
+                'Distractor 1: análisis superficial sin profundidad',
+                'Distractor 2: interpretación sesgada',
+                'Distractor 3: evaluación incorrecta de evidencias'
+            ]
+        END;
+
+        -- Insertar 4 opciones por ejercicio
+        FOR i IN 1..4 LOOP
+            INSERT INTO educational_content.exercise_options (
+                id,
+                exercise_id,
+                option_text,
+                is_correct,
+                position,
+                explanation,
+                created_at,
+                updated_at
+            ) VALUES (
+                gen_random_uuid(),
+                exercise_rec.id,
+                option_texts[i],
+                (i = 1),  -- Primera opción es la correcta
+                i,
+                CASE
+                    WHEN i = 1 THEN 'Esta es la respuesta correcta porque demuestra comprensión completa del texto.'
+                    ELSE format('Esta opción es incorrecta porque representa un error común de tipo %s.', i - 1)
+                END,
+                gamilit.now_mexico(),
+                gamilit.now_mexico()
+            );
+
+            options_count := options_count + 1;
+        END LOOP;
+    END LOOP;
+
+    RAISE NOTICE '========================================';
+    RAISE NOTICE 'OPCIONES DE EJERCICIOS CREADAS';
+    RAISE NOTICE '========================================';
+    RAISE NOTICE 'Total opciones creadas: %', options_count;
+    RAISE NOTICE '========================================';
+END $$;
+
+-- =====================================================
+-- Verification Query
+-- =====================================================
+
+DO $$
+DECLARE
+    options_count INTEGER;
+    mc_exercises_count INTEGER;
+    correct_options_count INTEGER;
+BEGIN
+    SELECT COUNT(*) INTO options_count
+    FROM educational_content.exercise_options;
+
+    SELECT COUNT(*) INTO mc_exercises_count
+    FROM educational_content.exercises
+    WHERE mechanic_type = 'multiple_choice';
+
+    SELECT COUNT(DISTINCT exercise_id) INTO correct_options_count
+    FROM educational_content.exercise_options
+    WHERE is_correct = true;
+
+    RAISE NOTICE '========================================';
+    RAISE NOTICE 'VERIFICACIÓN DE OPCIONES';
+    RAISE NOTICE '========================================';
+    RAISE NOTICE 'Total opciones: %', options_count;
+    RAISE NOTICE 'Ejercicios multiple_choice: %', mc_exercises_count;
+    RAISE NOTICE 'Ejercicios con respuesta correcta: %', correct_options_count;
+    RAISE NOTICE 'Promedio opciones por ejercicio: %',
+        ROUND(options_count::numeric / NULLIF(mc_exercises_count, 0), 1);
+    RAISE NOTICE '========================================';
+
+    IF correct_options_count = mc_exercises_count THEN
+        RAISE NOTICE '✓ Todos los ejercicios tienen exactamente 1 respuesta correcta';
+    ELSE
+        RAISE WARNING '⚠ Algunos ejercicios no tienen respuesta correcta';
+    END IF;
+END $$;

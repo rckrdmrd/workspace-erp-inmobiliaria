@@ -1,9 +1,41 @@
 # ================================
-# Repositorios de Referencia Externa
+# ORCHESTRATION (Directivas y Prompts)
 # ================================
-# Ignorar toda la carpeta de repositorios clonados para referencia
-# (Odoo, OCA, etc.) - Son muy grandes y no deben versionarse aquí
-reference/
+# IMPORTANTE: orchestration/ DEBE estar en el repositorio para Claude Code cloud
+# Contiene: prompts de agentes, directivas, trazas, inventarios, templates
+# Solo ignorar subcarpetas temporales específicas y archivos comprimidos
+orchestration/.archive/
+orchestration/.tmp/
+orchestration/**/*.tmp
+orchestration/**/*.cache
+
+# ================================
+# REFERENCE (Código de Referencia)
+# ================================
+# IMPORTANTE: reference/ DEBE estar en el repositorio para Claude Code cloud
+# Contiene: proyectos de referencia (Odoo, OCA, etc.) para análisis y desarrollo
+# Ignorar solo carpetas de build/dependencias dentro de reference/
+# Esto permite versionar código fuente pero NO dependencias ni builds
+reference/**/node_modules/
+reference/**/dist/
+reference/**/build/
+reference/**/.next/
+reference/**/.nuxt/
+reference/**/coverage/
+reference/**/.turbo/
+reference/**/.nx/
+reference/**/out/
+reference/**/__pycache__/
+reference/**/*.pyc
+reference/**/*.pyo
+reference/**/.eggs/
+reference/**/venv/
+reference/**/env/
+reference/**/.venv/
+reference/**/*.log
+reference/**/*.tmp
+reference/**/*.cache
+reference/**/.DS_Store
 
 # ================================
 # Python
@@ -77,3 +109,30 @@ logs/
 *.tmp
 *.temp
 .cache/
+
+# ================================
+# BACKUPS (Carpetas de Respaldo)
+# ================================
+# Ignorar carpetas de backup para mantener el workspace limpio
+# Nomenclatura estándar: *_old, *_bckp, *_bkp, *_backup
+*_old/
+*_bckp/
+*_bkp/
+*_backup/
+*.old/
+*.bak/
+*.backup/
+
+# Archivos comprimidos de backup
+*.tar.gz
+*.tar.bz2
+*.zip
+backup-*.tar.gz
+backup-*.zip
+
+# Carpetas específicas de backup conocidas
+orchestration_old/
+orchestration_bckp/
+docs_bkp/
+modules_old/
+scripts_backup/

@@ -1,0 +1,524 @@
+-- =====================================================
+-- Seed: auth_management.profiles (PROD)
+-- Description: Perfiles asociados a usuarios demo
+-- Environment: PRODUCTION
+-- Dependencies: auth.users, auth_management.tenants
+-- Order: 03
+-- Created: 2025-01-11
+-- Version: 1.0
+-- =====================================================
+--
+-- PERFILES DEMO INCLUIDOS:
+-- - 5 perfiles de estudiantes
+-- - 2 perfiles de profesores
+-- - 2 perfiles de administradores
+-- - 1 perfil de padre
+--
+-- TOTAL: 10 perfiles demo (uno por cada usuario)
+--
+-- IMPORTANTE: Estos perfiles están asociados a los usuarios
+-- creados en auth/01-demo-users.sql
+-- =====================================================
+
+SET search_path TO auth_management, public;
+
+-- =====================================================
+-- INSERT: Perfiles Demo
+-- =====================================================
+
+INSERT INTO auth_management.profiles (
+    id,
+    tenant_id,
+    user_id,
+    email,
+    display_name,
+    full_name,
+    first_name,
+    last_name,
+    avatar_url,
+    bio,
+    phone,
+    date_of_birth,
+    grade_level,
+    student_id,
+    school_id,
+    role,
+    status,
+    email_verified,
+    phone_verified,
+    preferences,
+    metadata,
+    created_at,
+    updated_at
+) VALUES
+
+-- =====================================================
+-- ESTUDIANTES (5)
+-- =====================================================
+(
+    '01ac4f00-082e-4287-b899-2e169c49b05e'::uuid,
+    'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11'::uuid,  -- Tenant principal
+    '01ac4f00-082e-4287-b899-2e169c49b05e'::uuid,  -- user_id
+    'estudiante1@demo.glit.edu.mx',
+    'Ana García',
+    'Ana García Pérez',
+    'Ana',
+    'García Pérez',
+    '/avatars/student1.png',
+    'Estudiante de 5to grado apasionada por la lectura y la ciencia.',
+    '55-1234-5678',
+    '2012-03-15'::date,
+    '5',  -- grade_level
+    'EST-2024-001',
+    NULL,  -- school_id (será asociado después)
+    'student'::auth_management.gamilit_role,
+    'active'::auth_management.user_status,
+    true,
+    false,
+    jsonb_build_object(
+        'theme', 'detective',
+        'language', 'es',
+        'timezone', 'America/Mexico_City',
+        'sound_enabled', true,
+        'notifications_enabled', true,
+        'gamification', jsonb_build_object(
+            'show_leaderboard', true,
+            'show_achievements', true,
+            'show_rank', true
+        )
+    ),
+    jsonb_build_object(
+        'interests', ARRAY['ciencia', 'lectura', 'matemáticas'],
+        'learning_style', 'visual',
+        'demo_user', true
+    ),
+    gamilit.now_mexico(),
+    gamilit.now_mexico()
+),
+(
+    '02bc5f00-182e-5387-c899-3f269d49c06f'::uuid,
+    'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11'::uuid,
+    '02bc5f00-182e-5387-c899-3f269d49c06f'::uuid,
+    'estudiante2@demo.glit.edu.mx',
+    'Carlos Ramírez',
+    'Carlos Ramírez López',
+    'Carlos',
+    'Ramírez López',
+    '/avatars/student2.png',
+    'Estudiante de 5to grado, le encanta resolver acertijos y rompecabezas.',
+    '55-2345-6789',
+    '2012-07-22'::date,
+    '5',
+    'EST-2024-002',
+    NULL,
+    'student'::auth_management.gamilit_role,
+    'active'::auth_management.user_status,
+    true,
+    false,
+    jsonb_build_object(
+        'theme', 'detective',
+        'language', 'es',
+        'timezone', 'America/Mexico_City',
+        'sound_enabled', true,
+        'notifications_enabled', true
+    ),
+    jsonb_build_object(
+        'interests', ARRAY['acertijos', 'deportes', 'tecnología'],
+        'learning_style', 'kinesthetic',
+        'demo_user', true
+    ),
+    gamilit.now_mexico(),
+    gamilit.now_mexico()
+),
+(
+    '03cd6000-282e-6487-d899-40369e49d070'::uuid,
+    'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11'::uuid,
+    '03cd6000-282e-6487-d899-40369e49d070'::uuid,
+    'estudiante3@demo.glit.edu.mx',
+    'María Fernanda',
+    'María Fernanda Sánchez',
+    'María Fernanda',
+    'Sánchez',
+    '/avatars/student3.png',
+    'Estudiante de 5to grado, creativa y con gran imaginación.',
+    '55-3456-7890',
+    '2012-11-08'::date,
+    '5',
+    'EST-2024-003',
+    NULL,
+    'student'::auth_management.gamilit_role,
+    'active'::auth_management.user_status,
+    true,
+    false,
+    jsonb_build_object(
+        'theme', 'detective',
+        'language', 'es',
+        'timezone', 'America/Mexico_City',
+        'sound_enabled', true,
+        'notifications_enabled', true
+    ),
+    jsonb_build_object(
+        'interests', ARRAY['arte', 'escritura', 'música'],
+        'learning_style', 'auditory',
+        'demo_user', true
+    ),
+    gamilit.now_mexico(),
+    gamilit.now_mexico()
+),
+(
+    '04de7000-382e-7587-e899-51469f49e081'::uuid,
+    'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11'::uuid,
+    '04de7000-382e-7587-e899-51469f49e081'::uuid,
+    'estudiante4@demo.glit.edu.mx',
+    'Luis Miguel',
+    'Luis Miguel Torres',
+    'Luis Miguel',
+    'Torres',
+    '/avatars/student4.png',
+    'Estudiante de 5to grado, entusiasta del deporte y el trabajo en equipo.',
+    '55-4567-8901',
+    '2012-05-30'::date,
+    '5',
+    'EST-2024-004',
+    NULL,
+    'student'::auth_management.gamilit_role,
+    'active'::auth_management.user_status,
+    true,
+    false,
+    jsonb_build_object(
+        'theme', 'detective',
+        'language', 'es',
+        'timezone', 'America/Mexico_City',
+        'sound_enabled', true,
+        'notifications_enabled', true
+    ),
+    jsonb_build_object(
+        'interests', ARRAY['deportes', 'historia', 'geografía'],
+        'learning_style', 'social',
+        'demo_user', true
+    ),
+    gamilit.now_mexico(),
+    gamilit.now_mexico()
+),
+(
+    '05ef8000-482e-8687-f899-62569049f092'::uuid,
+    'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11'::uuid,
+    '05ef8000-482e-8687-f899-62569049f092'::uuid,
+    'estudiante5@demo.glit.edu.mx',
+    'Sofía Martínez',
+    'Sofía Martínez Hernández',
+    'Sofía',
+    'Martínez Hernández',
+    '/avatars/student5.png',
+    'Estudiante de 6to grado, líder natural y muy responsable.',
+    '55-5678-9012',
+    '2011-09-14'::date,
+    '6',
+    'EST-2024-005',
+    NULL,
+    'student'::auth_management.gamilit_role,
+    'active'::auth_management.user_status,
+    true,
+    false,
+    jsonb_build_object(
+        'theme', 'detective',
+        'language', 'es',
+        'timezone', 'America/Mexico_City',
+        'sound_enabled', true,
+        'notifications_enabled', true
+    ),
+    jsonb_build_object(
+        'interests', ARRAY['liderazgo', 'ciencias sociales', 'debate'],
+        'learning_style', 'logical',
+        'demo_user', true
+    ),
+    gamilit.now_mexico(),
+    gamilit.now_mexico()
+),
+
+-- =====================================================
+-- PROFESORES (2)
+-- =====================================================
+(
+    '10ac4f00-092e-4297-b909-2e179c49b15e'::uuid,
+    'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11'::uuid,
+    '10ac4f00-092e-4297-b909-2e179c49b15e'::uuid,
+    'profesor1@demo.glit.edu.mx',
+    'Prof. Roberto Méndez',
+    'Roberto Méndez García',
+    'Roberto',
+    'Méndez García',
+    '/avatars/teacher1.png',
+    'Profesor de Lengua Española y Literatura con 15 años de experiencia.',
+    '55-6789-0123',
+    '1980-04-20'::date,
+    NULL,  -- grade_level NULL para profesores
+    NULL,  -- student_id NULL para profesores
+    NULL,
+    'teacher'::auth_management.gamilit_role,
+    'active'::auth_management.user_status,
+    true,
+    true,
+    jsonb_build_object(
+        'theme', 'detective',
+        'language', 'es',
+        'timezone', 'America/Mexico_City',
+        'sound_enabled', true,
+        'notifications_enabled', true
+    ),
+    jsonb_build_object(
+        'subjects', ARRAY['Lengua Española', 'Literatura', 'Comprensión Lectora'],
+        'years_experience', 15,
+        'certifications', ARRAY['SEP', 'Maestría en Educación'],
+        'demo_user', true
+    ),
+    gamilit.now_mexico(),
+    gamilit.now_mexico()
+),
+(
+    '11bc5f00-192e-5397-c919-3f279d49c26f'::uuid,
+    'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11'::uuid,
+    '11bc5f00-192e-5397-c919-3f279d49c26f'::uuid,
+    'profesor2@demo.glit.edu.mx',
+    'Profa. Laura González',
+    'Laura González Martínez',
+    'Laura',
+    'González Martínez',
+    '/avatars/teacher2.png',
+    'Profesora de Comprensión Lectora especializada en métodos innovadores.',
+    '55-7890-1234',
+    '1985-08-12'::date,
+    NULL,
+    NULL,
+    NULL,
+    'teacher'::auth_management.gamilit_role,
+    'active'::auth_management.user_status,
+    true,
+    true,
+    jsonb_build_object(
+        'theme', 'detective',
+        'language', 'es',
+        'timezone', 'America/Mexico_City',
+        'sound_enabled', true,
+        'notifications_enabled', true
+    ),
+    jsonb_build_object(
+        'subjects', ARRAY['Comprensión Lectora', 'Redacción', 'Análisis de Textos'],
+        'years_experience', 10,
+        'certifications', ARRAY['SEP', 'Diplomado en Lectoescritura'],
+        'demo_user', true
+    ),
+    gamilit.now_mexico(),
+    gamilit.now_mexico()
+),
+
+-- =====================================================
+-- ADMINISTRADORES (2)
+-- =====================================================
+(
+    '20ac4f00-002e-4207-b809-2e189c49b25e'::uuid,
+    'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11'::uuid,
+    '20ac4f00-002e-4207-b809-2e189c49b25e'::uuid,
+    'admin@gamilit.com',
+    'Admin GAMILIT',
+    'Administrador GAMILIT',
+    'Admin',
+    'GAMILIT',
+    '/avatars/admin.png',
+    'Administrador principal del sistema GAMILIT.',
+    '55-8901-2345',
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    'super_admin'::auth_management.gamilit_role,
+    'active'::auth_management.user_status,
+    true,
+    true,
+    jsonb_build_object(
+        'theme', 'detective',
+        'language', 'es',
+        'timezone', 'America/Mexico_City',
+        'sound_enabled', true,
+        'notifications_enabled', true
+    ),
+    jsonb_build_object(
+        'admin_level', 'super',
+        'permissions', ARRAY['all'],
+        'demo_user', true
+    ),
+    gamilit.now_mexico(),
+    gamilit.now_mexico()
+),
+(
+    '21bc5f00-102e-5307-c829-3f289d49c36f'::uuid,
+    'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11'::uuid,
+    '21bc5f00-102e-5307-c829-3f289d49c36f'::uuid,
+    'director@demo.glit.edu.mx',
+    'Lic. Patricia Hernández',
+    'Patricia Hernández López',
+    'Patricia',
+    'Hernández López',
+    '/avatars/school_admin.png',
+    'Directora de escuela demo con amplia experiencia en gestión educativa.',
+    '55-9012-3456',
+    '1975-12-05'::date,
+    NULL,
+    NULL,
+    NULL,
+    'school_admin'::auth_management.gamilit_role,
+    'active'::auth_management.user_status,
+    true,
+    true,
+    jsonb_build_object(
+        'theme', 'detective',
+        'language', 'es',
+        'timezone', 'America/Mexico_City',
+        'sound_enabled', true,
+        'notifications_enabled', true
+    ),
+    jsonb_build_object(
+        'admin_level', 'school',
+        'years_experience', 20,
+        'certifications', ARRAY['SEP', 'Maestría en Administración Educativa'],
+        'demo_user', true
+    ),
+    gamilit.now_mexico(),
+    gamilit.now_mexico()
+),
+
+-- =====================================================
+-- PADRES (1)
+-- =====================================================
+(
+    '30ac4f00-012e-4217-b819-2e199c49b35e'::uuid,
+    'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11'::uuid,
+    '30ac4f00-012e-4217-b819-2e199c49b35e'::uuid,
+    'padre1@demo.glit.edu.mx',
+    'Sr. Jorge García',
+    'Jorge García Morales',
+    'Jorge',
+    'García Morales',
+    '/avatars/parent.png',
+    'Padre de familia interesado en el progreso educativo de su hija.',
+    '55-0123-4567',
+    '1978-06-18'::date,
+    NULL,
+    NULL,
+    NULL,
+    'parent'::auth_management.gamilit_role,
+    'active'::auth_management.user_status,
+    true,
+    true,
+    jsonb_build_object(
+        'theme', 'detective',
+        'language', 'es',
+        'timezone', 'America/Mexico_City',
+        'sound_enabled', true,
+        'notifications_enabled', true,
+        'parent_portal', jsonb_build_object(
+            'daily_summary', true,
+            'weekly_report', true,
+            'low_performance_alerts', true
+        )
+    ),
+    jsonb_build_object(
+        'children', ARRAY['01ac4f00-082e-4287-b899-2e169c49b05e'],  -- Ana García
+        'preferred_contact', 'email',
+        'demo_user', true
+    ),
+    gamilit.now_mexico(),
+    gamilit.now_mexico()
+)
+
+ON CONFLICT (email) DO UPDATE SET
+    display_name = EXCLUDED.display_name,
+    full_name = EXCLUDED.full_name,
+    first_name = EXCLUDED.first_name,
+    last_name = EXCLUDED.last_name,
+    avatar_url = EXCLUDED.avatar_url,
+    bio = EXCLUDED.bio,
+    phone = EXCLUDED.phone,
+    date_of_birth = EXCLUDED.date_of_birth,
+    grade_level = EXCLUDED.grade_level,
+    student_id = EXCLUDED.student_id,
+    role = EXCLUDED.role,
+    status = EXCLUDED.status,
+    preferences = EXCLUDED.preferences,
+    metadata = EXCLUDED.metadata,
+    updated_at = gamilit.now_mexico();
+
+-- =====================================================
+-- Verification Query
+-- =====================================================
+
+DO $$
+DECLARE
+    profile_count INTEGER;
+    students_count INTEGER;
+    teachers_count INTEGER;
+    admins_count INTEGER;
+    parents_count INTEGER;
+BEGIN
+    SELECT COUNT(*) INTO profile_count
+    FROM auth_management.profiles
+    WHERE email LIKE '%@demo.glit.edu.mx' OR email = 'admin@gamilit.com';
+
+    SELECT COUNT(*) INTO students_count
+    FROM auth_management.profiles
+    WHERE role = 'student'::auth_management.gamilit_role
+      AND (email LIKE '%@demo.glit.edu.mx' OR email = 'admin@gamilit.com');
+
+    SELECT COUNT(*) INTO teachers_count
+    FROM auth_management.profiles
+    WHERE role = 'teacher'::auth_management.gamilit_role
+      AND (email LIKE '%@demo.glit.edu.mx' OR email = 'admin@gamilit.com');
+
+    SELECT COUNT(*) INTO admins_count
+    FROM auth_management.profiles
+    WHERE role IN ('super_admin'::auth_management.gamilit_role, 'school_admin'::auth_management.gamilit_role)
+      AND (email LIKE '%@demo.glit.edu.mx' OR email = 'admin@gamilit.com');
+
+    SELECT COUNT(*) INTO parents_count
+    FROM auth_management.profiles
+    WHERE role = 'parent'::auth_management.gamilit_role
+      AND (email LIKE '%@demo.glit.edu.mx' OR email = 'admin@gamilit.com');
+
+    RAISE NOTICE '========================================';
+    RAISE NOTICE 'PERFILES DEMO CREADOS EXITOSAMENTE';
+    RAISE NOTICE '========================================';
+    RAISE NOTICE 'Total perfiles: %', profile_count;
+    RAISE NOTICE '  - Estudiantes: %', students_count;
+    RAISE NOTICE '  - Profesores: %', teachers_count;
+    RAISE NOTICE '  - Administradores: %', admins_count;
+    RAISE NOTICE '  - Padres: %', parents_count;
+    RAISE NOTICE '========================================';
+
+    IF profile_count = 10 THEN
+        RAISE NOTICE '✓ Todos los perfiles demo fueron creados correctamente';
+    ELSE
+        RAISE WARNING '⚠ Se esperaban 10 perfiles, se crearon %', profile_count;
+    END IF;
+END $$;
+
+-- =====================================================
+-- Validación de relación con usuarios
+-- =====================================================
+
+DO $$
+DECLARE
+    orphan_profiles INTEGER;
+BEGIN
+    SELECT COUNT(*) INTO orphan_profiles
+    FROM auth_management.profiles p
+    WHERE NOT EXISTS (
+        SELECT 1 FROM auth.users u WHERE u.id = p.user_id
+    )
+    AND (p.email LIKE '%@demo.glit.edu.mx' OR p.email = 'admin@gamilit.com');
+
+    IF orphan_profiles > 0 THEN
+        RAISE WARNING '⚠ Se encontraron % perfiles sin usuario asociado', orphan_profiles;
+    ELSE
+        RAISE NOTICE '✓ Todos los perfiles tienen un usuario asociado';
+    END IF;
+END $$;

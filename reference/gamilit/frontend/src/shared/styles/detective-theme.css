@@ -1,0 +1,619 @@
+/* ============================================
+   DETECTIVE THEME - GAMILIT Platform
+   Versión 2.0 - CSS Puro (Compatible Tailwind 4)
+   ============================================ */
+
+/* ===== BOTONES DETECTIVE ===== */
+
+.btn-detective {
+  position: relative;
+  overflow: hidden;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease-out;
+  background: linear-gradient(to bottom right, var(--detective-orange), var(--detective-orange-dark));
+  color: white;
+  box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.1);
+  transform: scale(1);
+}
+
+.btn-detective:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.15);
+}
+
+.btn-detective:active {
+  transform: scale(0.98);
+}
+
+.btn-gold {
+  position: relative;
+  overflow: hidden;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease-out;
+  background: #ea580c;
+  color: white;
+  box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.1);
+}
+
+.btn-gold:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.15);
+  background: #f97316;
+}
+
+.btn-blue {
+  position: relative;
+  overflow: hidden;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease-out;
+  background: #ea580c;
+  color: white;
+  box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.1);
+}
+
+.btn-blue:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.15);
+  background: #f97316;
+}
+
+.btn-green {
+  position: relative;
+  overflow: hidden;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease-out;
+  background: #ea580c;
+  color: white;
+  box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.1);
+}
+
+.btn-green:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.15);
+  background: #f97316;
+}
+
+.btn-purple {
+  position: relative;
+  overflow: hidden;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease-out;
+  background: #ea580c;
+  color: white;
+  box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.1);
+}
+
+.btn-purple:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.15);
+  background: #f97316;
+}
+
+.btn-danger {
+  position: relative;
+  overflow: hidden;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease-out;
+  background: #ef4444;
+  color: white;
+  box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.1);
+}
+
+.btn-danger:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.15);
+  background: #dc2626;
+}
+
+.btn-danger:active {
+  transform: scale(0.98);
+}
+
+/* ===== CARDS DETECTIVE ===== */
+
+.detective-card {
+  background: white;
+  border-radius: 1rem;
+  border: 1px solid #fde68a;
+  padding: 1.5rem;
+  transition: all 0.2s ease-out;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.detective-card:hover {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.card-gold {
+  background: white;
+  border-radius: 1rem;
+  border: 1px solid #fef3c7;
+  padding: 1.5rem;
+  transition: all 0.2s ease-out;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.card-gold:hover {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+/* ===== CARD VARIANTS (Exercise & Mystery) ===== */
+
+.card-exercise {
+  background: white;
+  border-radius: 1rem;
+  border: 2px solid #bfdbfe;
+  padding: 1.5rem;
+  transition: all 0.2s ease-out;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.card-exercise:hover {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15);
+  transform: translateY(-4px);
+  border-color: #60a5fa;
+}
+
+.card-mystery {
+  background: linear-gradient(145deg, #f8fafc 0%, #e2e8f0 100%);
+  border-radius: 1rem;
+  border: 1px solid #cbd5e1;
+  padding: 1.5rem;
+  transition: all 0.2s ease-out;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.card-mystery:hover {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+  border-color: #94a3b8;
+}
+
+/* ===== RANK BADGES ===== */
+
+.rank-badge-detective {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: white;
+  background: linear-gradient(135deg, var(--rank-detective-from) 0%, var(--rank-detective-to) 100%);
+  box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.1);
+}
+
+.rank-badge-sargento {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: white;
+  background: linear-gradient(135deg, var(--rank-sargento-from) 0%, var(--rank-sargento-to) 100%);
+}
+
+.rank-badge-teniente {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: white;
+  background: linear-gradient(135deg, var(--rank-teniente-from) 0%, var(--rank-teniente-to) 100%);
+}
+
+.rank-badge-capitan {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: white;
+  background: linear-gradient(135deg, var(--rank-capitan-from) 0%, var(--rank-capitan-to) 100%);
+}
+
+.rank-badge-comisario {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: white;
+  background: linear-gradient(135deg, var(--rank-comisario-from) 0%, var(--rank-comisario-to) 100%);
+  box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* ===== PROGRESS BARS ===== */
+
+.progress-detective {
+  width: 100%;
+  background: #e5e7eb;
+  border-radius: 9999px;
+  height: 0.75rem; /* h-3 = 12px / 0.75rem for consistency with base projects */
+  overflow: hidden;
+}
+
+.progress-detective .progress-fill {
+  height: 100%;
+  transition: width 0.3s ease-out;
+  border-radius: 9999px;
+  background: linear-gradient(to right, #f97316, #ea580c); /* from-orange-500 to-orange-600 exact values */
+}
+
+.progress-xp {
+  width: 100%;
+  background: #fef3c7;
+  border-radius: 9999px;
+  height: 0.75rem;
+  overflow: hidden;
+}
+
+.progress-xp .progress-fill {
+  height: 100%;
+  transition: width 0.5s ease-out;
+  border-radius: 9999px;
+  background: linear-gradient(to right, var(--detective-gold), var(--rank-comisario-to));
+}
+
+/* ===== INPUT FIELDS ===== */
+
+.input-detective {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid #d1d5db;
+  border-radius: 0.5rem;
+  transition: all 0.2s;
+  background-color: var(--detective-bg);
+}
+
+.input-detective:focus {
+  outline: none;
+  border-color: var(--detective-orange);
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1);
+  ring: 2px;
+  ring-color: var(--detective-orange);
+}
+
+.input-detective.input-detective-sm {
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+}
+
+.input-detective.input-detective-md {
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+}
+
+.input-detective.input-detective-lg {
+  padding: 1rem 1.25rem;
+  font-size: 1.125rem;
+}
+
+.input-detective.input-detective-error {
+  border-color: #ef4444;
+}
+
+.input-detective.input-detective-error:focus {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+.input-detective.input-detective-success {
+  border-color: #22c55e;
+}
+
+.input-detective.input-detective-success:focus {
+  border-color: #22c55e;
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
+}
+
+.input-detective.input-detective-warning {
+  border-color: #eab308;
+}
+
+.input-detective.input-detective-warning:focus {
+  border-color: #eab308;
+  box-shadow: 0 0 0 3px rgba(234, 179, 8, 0.1);
+}
+
+/* ===== ACHIEVEMENT BADGES ===== */
+
+.achievement-common {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  background-color: #f3f4f6;
+  color: #6b7280;
+}
+
+.achievement-rare {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: white;
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+}
+
+.achievement-epic {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: white;
+  background: linear-gradient(135deg, var(--detective-orange) 0%, var(--detective-orange-dark) 100%);
+}
+
+.achievement-legendary {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: white;
+  background: linear-gradient(135deg, var(--detective-gold) 0%, var(--rank-comisario-to) 100%);
+}
+
+/* ===== TYPOGRAPHY ===== */
+
+.text-detective-title {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 700;
+  color: var(--detective-text);
+}
+
+.text-detective-subtitle {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+  color: var(--detective-text);
+}
+
+.text-detective-body {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  color: var(--detective-text);
+}
+
+.text-detective-small {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--detective-text-secondary);
+}
+
+/* ===== UTILITIES ===== */
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+  transition: transform 0.2s ease-out;
+}
+
+.hover-scale:hover {
+  transform: scale(1.05);
+  transition: transform 0.2s ease-out;
+}
+
+/* ===== LAYOUT ===== */
+
+.detective-container {
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .detective-container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .detective-container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* ===== BACKGROUNDS ===== */
+
+.bg-detective-gradient {
+  background: linear-gradient(to bottom right, #fff7ed 0%, #ffffff 50%, #fffbeb 100%);
+}
+
+.bg-detective-gradient-secondary {
+  background: linear-gradient(135deg, #fef3c7 0%, #fed7aa 100%);
+}
+
+.bg-detective-card-gradient {
+  background: linear-gradient(145deg, #ffffff 0%, #fffbeb 100%);
+}
+
+.bg-gold-gradient {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+}
+
+/* ===== LOADING OVERLAYS ===== */
+
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.loading-modal {
+  background: white;
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  min-width: 200px;
+}
+
+/* ===== DISABLED STATES ===== */
+
+.btn-detective:disabled,
+.btn-gold:disabled,
+.btn-blue:disabled,
+.btn-green:disabled,
+.btn-purple:disabled,
+.btn-danger:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.input-detective:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: #f3f4f6;
+}
+
+/* ===== FOCUS STATES (Enhanced) ===== */
+
+.input-detective:focus-visible {
+  outline: none;
+  border-color: var(--detective-orange);
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1);
+  ring: 2px;
+  ring-color: var(--detective-orange);
+}
+
+
+.input-detective.input-detective-error:focus-visible {
+  outline: none;
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+.input-detective.input-detective-success:focus-visible {
+  outline: none;
+  border-color: #22c55e;
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
+}
+
+.input-detective.input-detective-warning:focus-visible {
+  outline: none;
+  border-color: #eab308;
+  box-shadow: 0 0 0 3px rgba(234, 179, 8, 0.1);
+}
+button:focus-visible,
+a:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.3);
+  ring: 2px;
+  ring-color: var(--detective-orange);
+}
+
+/* ===== ANIMATIONS ===== */
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.skeleton {
+  animation: shimmer 2s infinite linear;
+  background: linear-gradient(
+    to right,
+    #f3f4f6 0%,
+    #e5e7eb 50%,
+    #f3f4f6 100%
+  );
+  background-size: 1000px 100%;
+}
+
+/* ===== BADGE ANIMATIONS ===== */
+
+.badge-pulse {
+  animation: badge-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes badge-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* ===== HOVER ANIMATIONS FOR EXERCISES ===== */
+
+.hover-lift-exercise:hover {
+  transform: translateY(-4px);
+  transition: transform 0.2s ease-out;
+}
+
+.hover-scale-sm:hover {
+  transform: scale(1.02);
+  transition: transform 0.2s ease-out;
+}
+
+/* ===== MODULE LOCK STATES (Aligned with base projects) ===== */
+
+.module-locked {
+  filter: grayscale(100%);
+  opacity: 0.6;
+}
+
+.module-lock-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 0.75rem;
+  z-index: 10;
+}
+
+.module-completed-badge {
+  position: absolute;
+  top: -0.75rem;
+  right: -0.75rem;
+  background: linear-gradient(to right, #eab308, #ca8a04);
+  border-radius: 9999px;
+  padding: 0.75rem;
+  box-shadow: 0 10px 15px -3px rgba(234, 179, 8, 0.3);
+  z-index: 20;
+}

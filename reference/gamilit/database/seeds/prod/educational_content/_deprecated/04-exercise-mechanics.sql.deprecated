@@ -1,0 +1,127 @@
+-- =====================================================
+-- Seed: educational_content.exercise_mechanics (PROD)
+-- Description: Mecánicas para todos los ejercicios
+-- Environment: PRODUCTION
+-- Dependencies: educational_content.exercises
+-- Order: 04
+-- Created: 2025-11-11
+-- Version: 1.0
+-- =====================================================
+--
+-- MECÁNICAS: 1 por cada ejercicio
+-- TOTAL: 85 mecánicas (mismo número que ejercicios)
+-- =====================================================
+
+SET search_path TO educational_content, public;
+
+-- =====================================================
+-- INSERT: Exercise Mechanics
+-- =====================================================
+
+INSERT INTO educational_content.exercise_mechanics (
+    id,
+    exercise_id,
+    mechanic_type,
+    configuration,
+    created_at,
+    updated_at
+)
+SELECT
+    gen_random_uuid(),
+    e.id,
+    e.mechanic_type,
+    CASE e.mechanic_type
+        WHEN 'multiple_choice' THEN jsonb_build_object(
+            'options_count', 4,
+            'correct_count', 1,
+            'randomize_options', true
+        )
+        WHEN 'fill_in_blanks' THEN jsonb_build_object(
+            'blanks_count', CASE
+                WHEN e.difficulty_level = 'beginner' THEN 2
+                WHEN e.difficulty_level = 'intermediate' THEN 3
+                ELSE 4
+            END,
+            'case_sensitive', false,
+            'accept_synonyms', true
+        )
+        WHEN 'matching' THEN jsonb_build_object(
+            'pairs_count', CASE
+                WHEN e.difficulty_level = 'beginner' THEN 4
+                WHEN e.difficulty_level = 'intermediate' THEN 5
+                ELSE 6
+            END,
+            'randomize', true
+        )
+        WHEN 'ordering' THEN jsonb_build_object(
+            'items_count', CASE
+                WHEN e.difficulty_level = 'beginner' THEN 4
+                WHEN e.difficulty_level = 'intermediate' THEN 5
+                ELSE 6
+            END,
+            'randomize', true
+        )
+        WHEN 'true_false' THEN jsonb_build_object(
+            'statements_count', 1,
+            'show_explanation', true
+        )
+        ELSE jsonb_build_object()
+    END,
+    gamilit.now_mexico(),
+    gamilit.now_mexico()
+FROM educational_content.exercises e
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM educational_content.exercise_mechanics em
+    WHERE em.exercise_id = e.id
+);
+
+-- =====================================================
+-- Verification Query
+-- =====================================================
+
+DO $$
+DECLARE
+    mechanics_count INTEGER;
+    exercises_count INTEGER;
+    mechanic_rec RECORD;
+BEGIN
+    SELECT COUNT(*) INTO mechanics_count
+    FROM educational_content.exercise_mechanics;
+
+    SELECT COUNT(*) INTO exercises_count
+    FROM educational_content.exercises;
+
+    RAISE NOTICE '========================================';
+    RAISE NOTICE 'MECÁNICAS DE EJERCICIOS CREADAS';
+    RAISE NOTICE '========================================';
+    RAISE NOTICE 'Total mecánicas: %', mechanics_count;
+    RAISE NOTICE 'Total ejercicios: %', exercises_count;
+    RAISE NOTICE '========================================';
+
+    IF mechanics_count = exercises_count THEN
+        RAISE NOTICE '✓ Todas las mecánicas fueron creadas (1 por ejercicio)';
+    ELSE
+        RAISE WARNING '⚠ Diferencia: % mecánicas vs % ejercicios',
+            mechanics_count, exercises_count;
+    END IF;
+
+    RAISE NOTICE '========================================';
+    RAISE NOTICE 'DISTRIBUCIÓN POR TIPO DE MECÁNICA';
+    RAISE NOTICE '========================================';
+
+    FOR mechanic_rec IN
+        SELECT
+            mechanic_type,
+            COUNT(*) as count
+        FROM educational_content.exercise_mechanics
+        GROUP BY mechanic_type
+        ORDER BY count DESC
+    LOOP
+        RAISE NOTICE '%: % mecánicas',
+            mechanic_rec.mechanic_type,
+            mechanic_rec.count;
+    END LOOP;
+
+    RAISE NOTICE '========================================';
+END $$;
